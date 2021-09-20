@@ -1,0 +1,42 @@
+<h2 style="text-align: center">Invoice Search</h2>
+<div class="searchWrapper">
+  <div class="searchBar customer-box">
+    <!-- First Name -->
+    <input [(ngModel)]="selectedCustomerName" [typeahead]="customerData" typeaheadOptionField="firstLastName"
+      [typeaheadOptionsInScrollableView]="5" [typeaheadScrollable]="true" (typeaheadOnSelect)="searchByName($event)"
+      class="form-control" placeholder="Enter company or individual name">
+  </div>
+</div>
+  <div>
+    <table class="table table-striped customer-box" *ngIf="invoices.length !== 0">
+      <thead>
+        <tr>
+          <th scope="col">Id#</th>
+          <th scope="col">In/Out</th>
+          <th scope="col">Date</th>
+          <th scope="col">Paid $</th>
+          <th scope="col">Due $</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices" (click)="transfer(invoice.id)" class="item">
+          <td>
+            {{ invoice.id }}
+          </td>
+          <td>
+            <i class="fa fa-paper-plane" *ngIf="invoice.outgoingInv === true">-OUT</i>
+            <i class="fa fa-usd" *ngIf="invoice.outgoingInv === false">-IN</i>
+          </td>
+          <td>
+            {{ invoice.invoiceDate | date:'short' }}
+          </td>
+          <td>
+            {{ invoice.amountPaid | currency }}
+          </td>
+          <td>
+            {{ 0 | currency }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

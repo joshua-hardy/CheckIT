@@ -1,0 +1,103 @@
+  <form>
+    <div>
+      <!-- first name -->
+      <div class="was-validated" style="width: 49%; float: left;">
+        <label for="FirstName">First name</label>
+        <input type="text" name="firstname" id="FirstName" class="form-control" placeholder="First name" [(ngModel)]="fname" required>
+        <div class="invalid-feedback">Enter a valid first name</div>
+      </div>
+      <!-- last name -->
+      <div class="was-validated" style="margin-left: 51%;">
+        <label for="LastName">Last name</label>
+        <input type="text" name="lastname" id="LastName" class="form-control" placeholder="Last name" [(ngModel)]="lname" required>
+      <div class="invalid-feedback">Enter a valid last name</div>
+    </div>
+    </div>
+  <!-- company name -->
+  <div>
+    <div class="form-group">
+      <label for="CompanyName">Company name</label>
+      <div class="input-group" id="CompanyName">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input type="checkbox" name="companycheck" id="CompanyCheck" [(ngModel)]="isCompany">
+          </div>
+        </div> 
+        <div *ngIf="isCompany === true; then isACompany; else isNotACompany"></div>
+        <ng-template #isACompany>
+          <input type="text" name="companyname" class="form-control" placeholder="Company name" [(ngModel)]="companyName" required>
+        </ng-template>
+        <ng-template #isNotACompany>
+          <input type="text" name="companyname" class="form-control" placeholder="Company name" [(ngModel)]="companyName" disabled="true">
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div>
+    <!-- phone -->
+    <div class="form-group" style="width: 49%; float: left;">
+      <label for="PhoneNumber">Phone</label>
+      <input type="text" name="phonenumber" id="PhoneNumber" class="form-control" placeholder="Phone #" [(ngModel)]="phone" required>
+      <div class="invalid-feedback">Enter a valid phone number</div>
+    </div>
+  <!-- email -->
+    <div class="form-group" style="margin-left: 51%;">
+      <label for="Email">Email</label>
+      <input type="text" name="email" id="Email" class="form-control" placeholder="Email" [(ngModel)]="email" required>
+      <div class="invalid-feedback">Enter a valid email</div>
+    </div>
+  </div>
+  <div>
+  <!-- country -->
+  <div class="form-group" style="width: 49%; float: left;">
+      <label for="Country">Country</label>
+      <input type="text" name="country" id="Country" class="form-control" placeholder="Country" [(ngModel)]="country" required>
+      <div class="invalid-feedback">Enter a valid country</div>
+    </div>
+  <!-- state -->
+  <div class="form-group" style="margin-left: 51%;">
+    <label for="State">Region</label>
+    <div *ngIf="USA(); then enabled; else disabled"></div>
+    <ng-template #enabled>
+      <select class="form-control" name="state" id="State" [(ngModel)]="state">
+        <option value="NA">N/A</option>
+        <option *ngFor="let state of stateCodes" [ngValue]="state">{{ state }}</option>
+      </select>
+    </ng-template>
+    <ng-template #disabled>
+        <select class="form-control" name="state" id="State" [(ngModel)]="state">
+          <option value="NA">N/A</option>
+        </select>
+    </ng-template>
+    </div>
+  </div>
+  <div>
+  <!-- zip -->
+  <div class="form-group" style="width: 49%; float: left;">
+      <label for="Zipcode">Postal Code</label>
+      <input type="text" name="zipcode" id="Zipcode" class="form-control" placeholder="Postal code" [(ngModel)]="zip" required>
+      <div class="invalid-feedback">Enter a valid postal code</div>
+    </div>
+  <!-- city -->
+  <div class="form-group" style="margin-left: 51%;">
+      <label for="CityField">City</label>
+      <input type="text" name="cityfield" id="CityField" class="form-control" placeholder="City" [(ngModel)]="city" required>
+      <div class="invalid-feedback">Enter a valid city</div>
+    </div>
+  </div>
+  <div>
+  <!-- street1 -->
+  <div class="form-group" style="width: 49%; float: left;">
+      <label for="StreetField1">Street Address</label>
+      <input type="text" name="streetfield1" id="StreetField1" class="form-control" placeholder="Street Address" [(ngModel)]="street1" required>
+      <div class="invalid-feedback">Enter a valid street address</div>
+    </div>
+  <!-- street2 -->
+  <div class="form-group" style="margin-left: 51%;">
+      <label for="StreetField2">Apartment Number</label>
+      <input type="text" name="streetfield2" id="StreetField2" class="form-control" placeholder="Apartment Number" [(ngModel)]="street2" required>
+      <div class="invalid-feedback">Enter a valid city</div>
+    </div>
+  </div>
+  <button type="primary" class="btn btn-outline-success" (click)="add()">Add</button>
+</form>
